@@ -17,14 +17,14 @@ class App extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: AIzaSyBxxOcj6qFxS367L-6gXDTKTeoW-qQKNiY }}
+          bootstrapURLKeys={{ key: "AIzaSyBxxOcj6qFxS367L-6gXDTKTeoW-qQKNiY" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
             lat={59.955413}
             lng={30.337844}
-            text={'Kreyser Avrora'}
+            zoom={10}
           />
         </GoogleMapReact>
       </div>
