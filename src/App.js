@@ -8,7 +8,7 @@ class App extends Component {
       lat: 30.3929697,
       lng: -91.238454
     },
-    zoom: 12,
+    zoom: 15,
     all: locations
   }
   constructor(props) {
@@ -83,7 +83,7 @@ updateMarkers = (locations) => {
         <Map
           aria-label="map"
           initialCenter={center}
-          defaultZoom={this.props.zoom}
+          zoom={this.props.zoom}
           google={this.props.google}
           locations={this.props.all}
           onReady={this.mapReady}
