@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import locations from './data/locations.json';
 
+
+
 class App extends Component {
   static defaultProps = {
     center: {
@@ -14,7 +16,7 @@ class App extends Component {
   constructor(props) {
      super(props);
      this.state={
-
+       hits: [],
        markers: [],
        markerProps: [],
        activeMarker: null,
@@ -24,8 +26,26 @@ class App extends Component {
      }
    }
 
+  postFormData = (url, data) => {
+    return fetch(url, {
+      method: 'POST',
+      credentials: 'omit',
+      body: new URLSearchParams(data),
+      headers: new Headers({
+        'Content-type': 'application/x-www-form-urlencoded'
+      })
+    })
+  }
 
- mapReady = (props, map) => {
+
+componentDidMount() {
+  this.postFormData('http://api.geonames.org/search', {username: 'vowy', north: 30.40815, west: -91.278549, south: 30.380068, east: -91.225334, type: "json", style: "SHORT"})
+   .then(results => results.json())
+   .then(data => console.log(data))
+ }
+
+
+mapReady = (props, map) => {
    this.setState({map});
    this.updateMarkers(this.props.all)
  }
@@ -67,7 +87,11 @@ updateMarkers = (locations) => {
   this.setState({marker, markerProps});
 }
   render() {
+
+    const { hits } = this.state.hits;
+
     let amProps = this.state.activeMarkerProps
+
 
     const center = {
       lat: this.props.center.lat,
@@ -75,6 +99,8 @@ updateMarkers = (locations) => {
     }
 
     const style={ height: '85vh', width: '100%' }
+
+
     return (
       <div className="App">
         <div id= "heading-text">
@@ -96,6 +122,7 @@ updateMarkers = (locations) => {
           onClose={this.closeInfoWindow}>
           <div>
             <h2>{amProps && amProps.name}</h2>
+
           </div>
           </InfoWindow>
           </Map>
