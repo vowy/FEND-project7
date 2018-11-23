@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import locations from './data/locations.json';
+import {Marker, Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
+
 
 
 
@@ -11,18 +11,17 @@ class App extends Component {
       lng: -91.238454
     },
     zoom: 15,
-    all: locations
   }
   constructor(props) {
      super(props);
      this.state={
-       hits: [],
        markers: [],
        markerProps: [],
        activeMarker: null,
        activeMarkerProps: null,
        showingInfoWindow: false,
-       currentLocation: []
+       currentLocation: [],
+       locations: []
      }
    }
 
@@ -41,13 +40,15 @@ class App extends Component {
 componentDidMount() {
   this.postFormData('http://api.geonames.org/search', {username: 'vowy', north: 30.40815, west: -91.278549, south: 30.380068, east: -91.225334, type: "json", style: "SHORT"})
    .then(results => results.json())
-   .then(data => console.log(data))
+   .then(data => {
+     return this.setState({locations: data.geonames})
+   })
  }
 
 
 mapReady = (props, map) => {
    this.setState({map});
-   this.updateMarkers(this.props.all)
+   this.updateMarkers(this.state.locations)
  }
 
 closeInfoWindow = () => {
@@ -69,13 +70,13 @@ updateMarkers = (locations) => {
       key: index,
       index,
       name: location.name,
-      position: location.pos
+      position: (location.lat, location.lng)
     };
     markerProps.push(mProps);
 
     let animation = this.props.google.maps.Animation.DROP;
     let marker = new this.props.google.maps.Marker({
-      position: location.pos,
+      position: (location.lat, location.lng),
       map: this.state.map,
       animation
     });
@@ -87,8 +88,6 @@ updateMarkers = (locations) => {
   this.setState({marker, markerProps});
 }
   render() {
-
-    const { hits } = this.state.hits;
 
     let amProps = this.state.activeMarkerProps
 
@@ -111,11 +110,24 @@ updateMarkers = (locations) => {
           initialCenter={center}
           zoom={this.props.zoom}
           google={this.props.google}
-          locations={this.props.all}
+          markers={this.state.locations}
           onReady={this.mapReady}
           onClick={this.closeInfoWindow}
           style={style}
           center={this.props.center}>
+{this.state.locations.map((location,index) =>
+  <Marker
+    key={index}
+    name={location.title}
+    position={{lat: location.lat,
+    lng: location.lng}}
+
+
+     />
+
+
+)}
+
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
