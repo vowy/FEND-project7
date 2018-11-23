@@ -118,11 +118,10 @@ updateMarkers = (locations) => {
 {this.state.locations.map((location,index) =>
   <Marker
     key={index}
-    name={location.title}
+    name={location.name}
     position={{lat: location.lat,
-    lng: location.lng}}
-
-
+              lng: location.lng}}
+    onClick={this.onMarkerClick}
      />
 
 
