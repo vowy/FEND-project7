@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.5.1",
     "google-maps-react": "^2.0.2",
+    "material-components-web": "^0.41.1",
     "react": "^16.6.1",
+    "react-burger-menu": "^2.5.4",
     "react-dom": "^16.6.1",
     "react-scripts": "2.1.1"
   },
