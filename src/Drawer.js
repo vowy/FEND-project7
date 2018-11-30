@@ -41,7 +41,7 @@ if (input==='' || !input) {
 
     return (
 
-<div id='menuBody'>
+<div id='bm-body'>
       <div className='searchbar'>
         <input
           type='search'

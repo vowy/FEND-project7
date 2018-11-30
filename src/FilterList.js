@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Item from './FilterItem.js'
+
 
 
 
@@ -19,18 +21,20 @@ export default class FilterList extends Component {
 
    }
 
-   handleClick = (e) => {
-     console.log(e);
-   }
 
    render() {
 
      return (
 <div className='filter-list'>
  <ul className='bm-item-list'>
-  {this.state.filteredLocations.map((location,i)=>
-{return <li key={i} className='bm-item' onClick={this.handleClick.bind(this)}>{location.name}</li>}
-   )}
+  {this.state.filteredLocations.map((item,index, e)=>
+
+<Item
+   key={index}
+   name={item.name}
+   index={item.index}> <li className='bm-item' onClick={(e)=>this.onItemClick}>{item.name}</li></Item>
+ )}
+
  </ul>
  </div>
 

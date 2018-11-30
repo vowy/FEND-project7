@@ -19,8 +19,8 @@ class App extends Component {
      super(props);
      this.state={
        mapProps: [],
-       activeMarker: null,
-       activeMarkerProps: null,
+       activeMarker: '',
+       activeMarkerProps: [],
        showingInfoWindow: false,
        filteredLocations: [],
        query: '',
@@ -50,12 +50,29 @@ class App extends Component {
     })
   }
 
-apiSearchLocation = () =>
+apiSearchLocation = () =>{
   this.postFormData('http://api.geonames.org/search', {username: 'vowy', north: 30.40815, west: -91.278549, south: 30.380068, east: -91.225334, type: "json", style: "SHORT"})
    .then(results => results.json())
    .then(data => {
-     return this.setState({locations: data.geonames, filteredLocations: data.geonames});
-   })
+    return this.setState({locations: data.geonames, filteredLocations: data.geonames});
+   })}
+
+getStreetAddress = () =>
+this.postFormData('http://api.geonames.org/findNearestAddressJSON', {username: 'vowy', lat: this.state.activeMarkerProps.position.lat, lng: this.state.activeMarkerProps.position.lng})
+ .then(response => response.json())
+ .then(responseJson => {
+   const JSONArray=(responseJson)
+  this.setState({...JSONArray})
+})
+
+
+componentDidUpdate(prevProps, prevStates) {
+  if ((this.states.activeMarkerProps !== prevStates.activeMarkerProps) && this.state.activeMarkerProps!==undefined) {
+      this.getStreetAddress()
+  } else {
+    return;
+  }
+}
 
 
 componentDidMount() {
@@ -83,21 +100,21 @@ onMarkerClick = (props, marker, e) => {
   render() {
 
 
-    let amProps = this.state.activeMarkerProps
-
+    const amProps = this.state.activeMarkerProps
 
     const center = {
       lat: this.props.center.lat,
       lng: this.props.center.lng
     }
 
+
     const mapStyle={ height: '90%', width: 'auto', overflow: 'hidden' }
 
-
+    const address = this.state.address
 
     return (
       <div className='App' id='outer-container'>
-        <Menu bodyClassName={ "menuBody" } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+        <Menu bodyClassName={ "bm-body" } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
         <Drawer
           clearFilter={this.clearFilter.bind(this)}
           onQueryUpdate={this.onQueryUpdate.bind(this)}
@@ -109,7 +126,9 @@ onMarkerClick = (props, marker, e) => {
 
       </Menu>
 
-        <Map id='page-wrap'
+        <Map
+          role={'application'}
+          id='page-wrap'
           aria-label='map'
           initialCenter={center}
           zoom={this.props.zoom}
@@ -127,7 +146,7 @@ return  <Marker
     key={index}
     name={location.name}
     position={position}
-    onClick={this.onMarkerClick}
+    onClick={this.onMarkerClick()}
      />;
 
 
@@ -139,7 +158,16 @@ return  <Marker
           visible={this.state.showingInfoWindow}
           onClose={this.closeInfoWindow}>
           <div>
+          <div className='active-marker-name'>
             <h2>{amProps && amProps.name}</h2>
+            </div>
+
+
+              if (!this.state.activeMarkerProps || this.state.activeMarkerProps===undefined) {
+                'loading...'
+              } else
+            <h3>{`${address && address.streetNumber} ${address && address.street}`}</h3>
+
 
           </div>
           </InfoWindow>
