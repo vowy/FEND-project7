@@ -5,6 +5,7 @@ import './App.css';
 import Drawer from './Drawer.js';
 
 
+
 class App extends Component {
   static defaultProps = {
     center: {
@@ -103,7 +104,8 @@ onMarkerClick = (props, marker, e) => {
           filteredLocations={this.state.filteredLocations}
           locations={this.state.locations}
           searchedQuery={this.state.query}
-          />
+          >
+      </Drawer>
 
       </Menu>
 

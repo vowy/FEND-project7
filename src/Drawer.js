@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import FilterList from './FilterList.js';
 
 
 export default class Drawer extends Component {
@@ -7,7 +7,7 @@ export default class Drawer extends Component {
      super(props);
      this.state={
        query: '',
-       filteredLocations: []
+       filteredLocations: [],
      }
    }
 
@@ -55,11 +55,11 @@ if (input==='' || !input) {
 <div id="showing-results-text">Showing {this.state.filteredLocations.length} Results:</div>
 <hr></hr>
 
-
-  {this.state.filteredLocations.map((item,index)=>
- <li key={index} className="menu-item" >{item.name}</li>
-  )}
+<FilterList filteredLocations={this.state.filteredLocations}/>
 </div>
+
+
+
 
 
     )

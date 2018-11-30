@@ -1,7 +1,7 @@
 .App {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
   flex: 1;
   flex-direction: column;
 }
@@ -13,6 +13,7 @@
   padding: 2.5em 1.5em 0;
   font-size: .9em;
   overflow: scroll;
+  width: 100%;
 }
 
 .Header {
@@ -22,26 +23,43 @@
 
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 30px;
+  width: 2em;
+  height: 1.5em;
+  left: 3%;
+  top: 3%;
 }
 
 .bm-burger-bars {
   background: #373a47;
 }
 
+.bm-cross-button {
+  color:white;
+  height: 24%;
+  width: 24%;
+  margin: 0;
+  padding: 0;
+  top: 5%;
+  align-self: flex-end;
+
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
 #header-text {
   padding: 0;
-  margin: 0;
+  margin-left: 30%;
   top: 2%;
   text-align: center;
 }
 
 #showing-results-text {
-  margin: 20px;
-  line-height: 0;
+  text-align: center;
+  margin-bottom: 4%;
+  margin-top: 2%;
+  line-height: 1em;
   font-size: 1em;
   font-style: italic;
 }
@@ -55,4 +73,18 @@
 
 ::-webkit-input-placeholder {
     font-style: italic;
+}
+
+.bm-item {
+ display:inherit;
+}
+
+.bm-item:hover {
+  cursor:pointer;
+  width:100%/
+}
+
+.bm-item-list {
+  padding: 0;
+  margin: 0;
 }
