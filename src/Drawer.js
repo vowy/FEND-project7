@@ -55,7 +55,7 @@ if (input==='' || !input) {
 <div id="showing-results-text">Showing {this.state.filteredLocations.length} Results:</div>
 <hr></hr>
 
-<FilterList filteredLocations={this.state.filteredLocations}/>
+<FilterList onItemClick={this.props.onItemClick} filteredLocations={this.state.filteredLocations}/>
 </div>
 
 

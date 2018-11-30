@@ -13,7 +13,7 @@ export default class Item extends Component {
    render() {
      return (
 <div id='filter-items'>
- <li className='bm-item' onClick={(e)=>this.onItemClick}>{this.props.name}</li>
+ <li className='bm-item' onClick={(e)=>this.props.onItemClick}>{this.props.name}</li>
 </div>
 
 

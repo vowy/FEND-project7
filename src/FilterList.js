@@ -17,9 +17,9 @@ export default class FilterList extends Component {
          this.setState({filteredLocations:this.props.filteredLocations});
     } else {
       return;
-    }
+    }}
 
-   }
+
 
 
    render() {
@@ -32,7 +32,9 @@ export default class FilterList extends Component {
 <Item
    key={index}
    name={item.name}
-   index={item.index}> <li className='bm-item' onClick={(e)=>this.onItemClick}>{item.name}</li></Item>
+   index={item.index}
+   onItemClick={this.props.onItemClick}>
+</Item>
  )}
 
  </ul>

@@ -87,7 +87,9 @@ onMarkerClick = (props, marker, e) => {
   this.getStreetAddress()
 }
 
-
+onItemClick = (props, marker, e) => {
+  console.log(props,marker,e);
+}
 
   render() {
 
@@ -113,6 +115,7 @@ onMarkerClick = (props, marker, e) => {
           filteredLocations={this.state.filteredLocations}
           locations={this.state.locations}
           searchedQuery={this.state.query}
+          onItemClick={this.onItemClick}
           />
       </Menu>
         <Map
