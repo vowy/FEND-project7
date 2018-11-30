@@ -19,11 +19,13 @@ class App extends Component {
      super(props);
      this.state={
        mapProps: [],
-       activeMarker: '',
-       activeMarkerProps: [],
+       address: null,
+       activeMarker: null,
+       activeMarkerProps: null,
        showingInfoWindow: false,
        filteredLocations: [],
-       query: '',
+       locations:[],
+       query: ''
      }
    }
 
@@ -51,7 +53,7 @@ class App extends Component {
   }
 
 apiSearchLocation = () =>{
-  this.postFormData('http://api.geonames.org/search', {username: 'vowy', north: 30.40815, west: -91.278549, south: 30.380068, east: -91.225334, type: "json", style: "SHORT"})
+  this.postFormData('http://api.geonames.org/search', {username: 'vowy', north: 30.40815, west: -91.278549, south: 30.380068, east: -91.225334, type: "json", style: "LONG"})
    .then(results => results.json())
    .then(data => {
     return this.setState({locations: data.geonames, filteredLocations: data.geonames});
@@ -65,16 +67,6 @@ this.postFormData('http://api.geonames.org/findNearestAddressJSON', {username: '
   this.setState({...JSONArray})
 })
 
-
-componentDidUpdate(prevProps, prevStates) {
-  if ((this.states.activeMarkerProps !== prevStates.activeMarkerProps) && this.state.activeMarkerProps!==undefined) {
-      this.getStreetAddress()
-  } else {
-    return;
-  }
-}
-
-
 componentDidMount() {
   this.apiSearchLocation();
 }
@@ -82,7 +74,7 @@ componentDidMount() {
 
 mapReady = (props, map) => {
    this.setState({map});
-   this.setState({mapProps: props});
+   this.setState({mapProps:props})
  }
 
 closeInfoWindow = (props, marker) => {
@@ -91,8 +83,8 @@ closeInfoWindow = (props, marker) => {
 
 onMarkerClick = (props, marker, e) => {
   this.closeInfoWindow(props, marker);
-  marker.setAnimation(this.props.google.maps.Animation.BOUNCE)
   this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props});
+  this.getStreetAddress()
 }
 
 
@@ -100,7 +92,7 @@ onMarkerClick = (props, marker, e) => {
   render() {
 
 
-    const amProps = this.state.activeMarkerProps
+    const amProps = this.state.activeMarkerProps?this.state.activeMarkerProps:null
 
     const center = {
       lat: this.props.center.lat,
@@ -121,13 +113,9 @@ onMarkerClick = (props, marker, e) => {
           filteredLocations={this.state.filteredLocations}
           locations={this.state.locations}
           searchedQuery={this.state.query}
-          >
-      </Drawer>
-
+          />
       </Menu>
-
         <Map
-          role={'application'}
           id='page-wrap'
           aria-label='map'
           initialCenter={center}
@@ -138,19 +126,17 @@ onMarkerClick = (props, marker, e) => {
           style={mapStyle}>
 
 {this.state.filteredLocations.map((location,index) =>
-{let position={lat: location.lat,
-          lng: location.lng}
 
-return  <Marker
+
+<Marker
     animation={(amProps? (((location.lat && location.lng) === (amProps.position.lat && amProps.position.lng))? 1 : 0):2)}
     key={index}
     name={location.name}
-    position={position}
-    onClick={this.onMarkerClick()}
-     />;
+    position={({lat: location.lat,lng: location.lng})}
+    onClick={(props,marker,e) => this.onMarkerClick(props,marker,e)}
+     />
 
-
- } )}
+ )}
 
 
         <InfoWindow
@@ -161,12 +147,8 @@ return  <Marker
           <div className='active-marker-name'>
             <h2>{amProps && amProps.name}</h2>
             </div>
-
-
-              if (!this.state.activeMarkerProps || this.state.activeMarkerProps===undefined) {
-                'loading...'
-              } else
-            <h3>{`${address && address.streetNumber} ${address && address.street}`}</h3>
+              <div><h3>{`${address && address.streetNumber} ${address && address.street}`}</h3></div>
+                      <div><h3>{`Brusly, ${address && address.adminName2}, ${address && address.postalcode}, ${address && address.adminCode1}`}</h3></div>
 
 
           </div>
