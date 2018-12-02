@@ -1,7 +1,8 @@
 # [FEND] Project 7: Neighborhood Map
 
 ### by Eric "Vowy" Parsons
-
+Live Link: https://vowy.github.io/FEND-project7/public/
+---
 ## Project Summary
 
 
@@ -14,6 +15,7 @@ Using GoogleMaps API, develop a single-page app of a neighborhood
 ## Install
 
 Download the files
+
 Open Terminal
 >$ cd FEND-project7
 
