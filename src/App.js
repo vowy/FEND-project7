@@ -72,24 +72,30 @@ componentDidMount() {
 }
 
 
+
 mapReady = (props, map) => {
    this.setState({map});
    this.setState({mapProps:props})
  }
 
-closeInfoWindow = (props, marker) => {
+closeInfoWindow = () => {
   this.setState({showingInfoWindow: false, activeMarker: null, activeMarkerProps: null})
 }
 
 onMarkerClick = (props, marker, e) => {
-  this.closeInfoWindow(props, marker);
+  this.closeInfoWindow();
   this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props});
   this.getStreetAddress()
 }
 
-onItemClick = (props, marker, e) => {
-  console.log(props,marker,e);
-}
+onItemClick = (e) => {
+  this.closeInfoWindow();
+  this.setState({selectedItem: e.target.innerHTML})
+  this.state.filteredLocations.find((location) => {
+    if (location.name===this.state.selectedItem)
+    this.onMarkerClick([], location, e)
+    }
+)}
 
   render() {
 
@@ -115,7 +121,7 @@ onItemClick = (props, marker, e) => {
           filteredLocations={this.state.filteredLocations}
           locations={this.state.locations}
           searchedQuery={this.state.query}
-          onItemClick={this.onItemClick}
+          onItemClick={this.onItemClick.bind(this)}
           />
       </Menu>
         <Map
@@ -129,8 +135,6 @@ onItemClick = (props, marker, e) => {
           style={mapStyle}>
 
 {this.state.filteredLocations.map((location,index) =>
-
-
 <Marker
     animation={(amProps? (((location.lat && location.lng) === (amProps.position.lat && amProps.position.lng))? 1 : 0):2)}
     key={index}
@@ -157,6 +161,7 @@ onItemClick = (props, marker, e) => {
           </div>
           </InfoWindow>
           </Map>
+
     </div>
 
     )
