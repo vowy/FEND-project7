@@ -65,7 +65,7 @@ this.postFormData('http://api.geonames.org/findNearestAddressJSON', {username: '
  .then(responseJson => {
    const JSONArray=(responseJson)
   this.setState({...JSONArray})
-})
+}).catch(alert('GeoNames is down/.'))
 
 componentDidMount() {
   this.apiSearchLocation();

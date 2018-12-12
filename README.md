@@ -6,14 +6,14 @@ Live Link: https://vowy.github.io/FEND-project7/public/
 ## Project Summary
 
 
-This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program.
+This is the seventh (and final!) project in <Udacity.com>'s Front-End Wed Developer Nano-Degree [FEND] program.
+Big thanks to GeoNames for their API!
+<geonames.org>
 
-## Project Instructions
 
-Using GoogleMaps API, develop a single-page app of a neighborhood
 
 ## Install
-
+###Note: ServiceWorker is only available in development build.
 Download the files
 
 Open Terminal
