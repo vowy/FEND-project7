@@ -35,6 +35,9 @@ class App extends Component {
   this.setState({filteredLocations: (this.state.locations.filter(place => place.name.toLowerCase().includes(this.state.query.toLowerCase())))});
 }
 
+gm_authFailure = () => {
+  window.alert("API Error!")
+}
 
   clearFilter = () => {
     this.setState({filteredLocations: this.state.locations})
@@ -69,6 +72,8 @@ this.postFormData('http://api.geonames.org/findNearestAddressJSON', {username: '
 
 componentDidMount() {
   this.apiSearchLocation();
+  window.gm_authFailure = () => gm_authFailure();
+
 }
 
 

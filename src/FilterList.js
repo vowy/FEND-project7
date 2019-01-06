@@ -26,7 +26,7 @@ export default class FilterList extends Component {
 
      return (
 <div className='filter-list'>
- <ul className='bm-item-list'>
+ <ul role='menu' className='bm-item-list'>
   {this.state.filteredLocations.map((item,index, e)=>
 
 <Item
