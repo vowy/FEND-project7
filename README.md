@@ -13,7 +13,7 @@ Big thanks to GeoNames for their API!
 
 
 ## Install
-###Note: ServiceWorker is only available in development build.
+### Note: ServiceWorker is only available in development build.
 Download the files
 
 Open Terminal
