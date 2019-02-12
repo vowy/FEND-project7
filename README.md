@@ -6,9 +6,9 @@ Live Link: https://vowy.github.io/FEND-project7/public/
 ## Project Summary
 
 
-This is the seventh (and final!) project in <Udacity.com>'s Front-End Wed Developer Nano-Degree [FEND] program.
+This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program.
 Big thanks to GeoNames for their API!
-<geonames.org>
+https://www.geonames.org
 
 
 
