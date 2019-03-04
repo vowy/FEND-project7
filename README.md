@@ -1,7 +1,7 @@
 # [FEND] Project 7: Neighborhood Map
 
 ### by Eric "Vowy" Parsons
-Live Link: https://vowy.github.io/FEND-project7/public/
+
 ---
 ## Project Summary
 
