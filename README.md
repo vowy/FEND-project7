@@ -6,7 +6,7 @@
 ## Project Summary
 
 
-### This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program. **Big thanks to [GeoNames](https://www.geonames.org)for their API!**
+### This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program. **Big thanks to [GeoNames](https://www.geonames.org) for their API!**
 
 The project is a responsive single-page web app made with React. It shows a neighborhood map of my hometown, Brusly, LA. The map is made using GoogleMaps API and the marker listings are gathered using GeoNames API. Clicking the menu icon reveals a menu where the user can view and filter the listing results.
 
