@@ -6,24 +6,36 @@
 ## Project Summary
 
 
-This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program.
-Big thanks to GeoNames for their API!
-https://www.geonames.org
+### This is the seventh (and final!) project in Udacity.com's Front-End Wed Developer Nano-Degree [FEND] program. **Big thanks to [GeoNames](https://www.geonames.org)for their API!**
 
+The project is a responsive single-page web app made with React. It shows a neighborhood map of my hometown, Brusly, LA. The map is made using GoogleMaps API and the marker listings are gathered using GeoNames API. Clicking the menu icon reveals a menu where the user can view and filter the listing results.
 
 
 ## Install
 ### Note: ServiceWorker is only available in development build.
-Download the files
 
-Open Terminal
->$ cd FEND-project7
+*npm has to be installed in order to view the project. For more information about npm click [here](https://www.npmjs.com/get-npm).*
 
+-Clone this repo, or download the files.
 
-then to run development build:
+-Open Terminal.
 
->$ npm start
+-Change current directory to this repo:
+
+```
+$ cd FEND-project7
+```
+
+Now, to run development build, input:
+
+```
+$ npm start
+```
 
 or
 
->$ yarn build
+```
+$ yarn build
+```
+
+A browser window should now open to served webpage.
