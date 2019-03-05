@@ -35,7 +35,7 @@ class App extends Component {
   this.setState({filteredLocations: (this.state.locations.filter(place => place.name.toLowerCase().includes(this.state.query.toLowerCase())))});
 }
 
-gm_authFailure = () => {
+  gm_authFailure = () => {
   window.alert("API Error!")
 }
 
@@ -60,28 +60,27 @@ apiSearchLocation = () =>{
    .then(results => results.json())
    .then(data => {
     return this.setState({locations: data.geonames, filteredLocations: data.geonames});
-   })}
+})
+}
 
-getStreetAddress = () =>
+getStreetAddress = () => {
 this.postFormData('http://api.geonames.org/findNearestAddressJSON', {username: 'vowy', lat: this.state.activeMarkerProps.position.lat, lng: this.state.activeMarkerProps.position.lng})
  .then(response => response.json())
  .then(responseJson => {
    const JSONArray=(responseJson)
   this.setState({...JSONArray})
-}).catch(alert('GeoNames is down/.'))
+})}
 
 componentDidMount() {
   this.apiSearchLocation();
-  window.gm_authFailure = () => gm_authFailure();
-
+  window.gm_authFailure = () => this.gm_authFailure();
 }
-
 
 
 mapReady = (props, map) => {
    this.setState({map});
    this.setState({mapProps:props})
- }
+}
 
 closeInfoWindow = () => {
   this.setState({showingInfoWindow: false, activeMarker: null, activeMarkerProps: null})
@@ -93,14 +92,6 @@ onMarkerClick = (props, marker, e) => {
   this.getStreetAddress()
 }
 
-onItemClick = (e) => {
-  this.closeInfoWindow();
-  this.setState({selectedItem: e.target.innerHTML})
-  this.state.filteredLocations.find((location) => {
-    if (location.name===this.state.selectedItem)
-    this.onMarkerClick([], location, e)
-    }
-)}
 
   render() {
 
@@ -126,7 +117,6 @@ onItemClick = (e) => {
           filteredLocations={this.state.filteredLocations}
           locations={this.state.locations}
           searchedQuery={this.state.query}
-          onItemClick={this.onItemClick.bind(this)}
           />
       </Menu>
         <Map

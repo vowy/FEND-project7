@@ -32,8 +32,7 @@ export default class FilterList extends Component {
 <Item
    key={index}
    name={item.name}
-   index={item.index}
-   onItemClick={this.props.onItemClick.bind(this)}>
+   index={item.index}>
 </Item>
  )}
 

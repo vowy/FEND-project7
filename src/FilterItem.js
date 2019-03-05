@@ -12,9 +12,15 @@ export default class Item extends Component {
 
    render() {
      return (
+
 <div id='filter-items'>
- <li className='bm-item' role='menuitem'>{this.props.name}</li>
+  <ul>
+ <li className='bm-item' role='menuitem'>
+   {this.props.name}
+ </li>
+  </ul>
 </div>
+
 
 
      )
